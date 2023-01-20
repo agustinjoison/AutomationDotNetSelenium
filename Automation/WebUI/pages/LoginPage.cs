@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 namespace WebUI.pages
 {
-	public class LoginPage
+	public class LoginPage : BasePage
 	{
-		public LoginPage(IWebDriver driver)
+		public LoginPage(IWebDriver driver) : base(driver)
 		{
 			PageFactory.InitElements(driver, this);
 		}
@@ -19,7 +19,11 @@ namespace WebUI.pages
         [FindsBy(How = How.Id, Using = "signInBtn")]
         private IWebElement sign;
 
-		public IWebElement getUsername()
+        [FindsBy(How = How.ClassName, Using = "alert-danger")]
+        private IWebElement alertError;
+        
+
+        public IWebElement getUsername()
 		{
 			return username;
 		}
@@ -32,6 +36,12 @@ namespace WebUI.pages
 		public IWebElement getSignButton()
 		{
 			return sign;
+		}
+
+		public IWebElement getAlertError()
+		{
+			waitForElementToBePreset(By.ClassName("alert-danger"));
+			return alertError;
 		}
     }
 }

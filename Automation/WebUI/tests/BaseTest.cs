@@ -15,17 +15,14 @@ namespace WebUI
         public void Setup()
         {
             String browserName = ConfigurationManager.AppSettings["browser"];
-            TestContext.Progress.WriteLine(browserName);
-
             InitBrowser(browserName);
-            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Url = ConfigurationManager.AppSettings["url"];
         }
 
         private void InitBrowser(string browserName)
-        {
-            switch(browserName)
+        {          
+            switch (browserName)
             {
                 case "Firefox":
                     new WebDriverManager.DriverManager().SetUpDriver(new FirefoxConfig());
@@ -41,6 +38,7 @@ namespace WebUI
         [TearDown]
         public void TearDown()
         {
+            driver.Close();
             driver.Quit();
         }
     }
