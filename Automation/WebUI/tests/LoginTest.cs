@@ -12,7 +12,7 @@ namespace WebUI
     public class LoginTest : BaseTest
     {
         [Test]
-        [TestCase("rahulshettyacademy", "learning")]
+        [TestCase("rahulshettyacadem", "learning")]
         public void shouldSuccessfullyLogin(String username, String password)
         {
             LoginPage loginPage = new LoginPage(driver.Value);

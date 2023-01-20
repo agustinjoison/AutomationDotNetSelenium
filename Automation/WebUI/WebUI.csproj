@@ -22,6 +22,7 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
     <PackageReference Include="DotNetSeleniumExtras.PageObjects" Version="3.11.0" />
     <PackageReference Include="DotNetSeleniumExtras.PageObjects.Core" Version="4.3.0" />
+    <PackageReference Include="ExtentReports" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,7 @@
     <None Remove="DotNetSeleniumExtras.PageObjects" />
     <None Remove="PageFactoryCore" />
     <None Remove="DotNetSeleniumExtras.PageObjects.Core" />
+    <None Remove="ExtentReports" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="tests\" />
