@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -9,15 +10,16 @@ namespace WebUI
 {
 	public class BaseTest 
 	{
-        protected IWebDriver driver;
+       
+        protected ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
 
         [SetUp]
         public void Setup()
         {
             String browserName = ConfigurationManager.AppSettings["browser"];
             InitBrowser(browserName);
-            driver.Manage().Window.Maximize();
-            driver.Url = ConfigurationManager.AppSettings["url"];
+            driver.Value.Manage().Window.Maximize();
+            driver.Value.Url = ConfigurationManager.AppSettings["url"];
         }
 
         private void InitBrowser(string browserName)
@@ -26,11 +28,11 @@ namespace WebUI
             {
                 case "Firefox":
                     new WebDriverManager.DriverManager().SetUpDriver(new FirefoxConfig());
-                    driver = new FirefoxDriver();
+                    driver.Value = new FirefoxDriver();
                     break;
                 case "Chrome":
                     new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
-                    driver = new ChromeDriver();
+                    driver.Value = new ChromeDriver();
                     break;
             }
         }
@@ -38,8 +40,8 @@ namespace WebUI
         [TearDown]
         public void TearDown()
         {
-            driver.Close();
-            driver.Quit();
+            driver.Value.Close();
+            driver.Value.Quit();
         }
     }
 }

@@ -8,27 +8,29 @@ using WebUI.pages;
 
 namespace WebUI
 {
+    [Parallelizable(ParallelScope.Children)]
     public class LoginTest : BaseTest
     {
         [Test]
         [TestCase("rahulshettyacademy", "learning")]
         public void shouldSuccessfullyLogin(String username, String password)
         {
-            LoginPage loginPage = new LoginPage(driver);
+            LoginPage loginPage = new LoginPage(driver.Value);
             loginPage.getUsername().SendKeys(username);
             loginPage.getPassword().SendKeys(password);
             loginPage.getSignButton().Click();
 
-            CatalogPage catalogPage = new CatalogPage(driver);
+            CatalogPage catalogPage = new CatalogPage(driver.Value);
 
             Assert.That(catalogPage.getTitle().Text, Is.EqualTo("ProtoCommerce"));
         }
 
 
         [Test, TestCaseSource(nameof(AddTestDataConfig))]
+        [Parallelizable(ParallelScope.All)]
         public void shouldFailLogin(String username, String password)
         {
-            LoginPage loginPage = new LoginPage(driver);
+            LoginPage loginPage = new LoginPage(driver.Value);
             loginPage.getUsername().SendKeys(username);
             loginPage.getPassword().SendKeys(password);
             loginPage.getSignButton().Click();
