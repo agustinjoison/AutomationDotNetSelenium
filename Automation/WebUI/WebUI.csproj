@@ -19,6 +19,9 @@
     <PackageReference Include="Selenium.WebDriver.WaitExtensions" Version="2.0.0" />
     <PackageReference Include="WebDriverManager" Version="2.16.2" />
     <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+    <PackageReference Include="DotNetSeleniumExtras.PageObjects" Version="3.11.0" />
+    <PackageReference Include="DotNetSeleniumExtras.PageObjects.Core" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +30,19 @@
     <None Remove="Selenium.WebDriver.WaitExtensions" />
     <None Remove="WebDriverManager" />
     <None Remove="SeleniumExtras.WaitHelpers" />
+    <None Remove="tests\" />
+    <None Remove="System.Configuration.ConfigurationManager" />
+    <None Remove="pages\" />
+    <None Remove="DotNetSeleniumExtras.PageObjects" />
+    <None Remove="PageFactoryCore" />
+    <None Remove="DotNetSeleniumExtras.PageObjects.Core" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="tests\" />
+    <Folder Include="pages\" />
+  </ItemGroup>
+
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+      <Copy SourceFiles="App.config" DestinationFiles="$(OutDir)\testhost.dll.config" />
+  </Target>
 </Project>
